@@ -130,11 +130,7 @@
 [commit]
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
-<<<<<<< HEAD
-	gpgsign = false
-=======
 	#gpgsign = true
->>>>>>> 88486a4c4e5e32cdddf650ff56a0bab884ad2524
 
 [diff]
 
