@@ -5,6 +5,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias .3='cd ../../../'                     # Go back 3 directory levels
+alias .4='cd ../../../../'                  # Go back 4 directory levels
+alias .5='cd ../../../../../'               # Go back 5 directory levels
+alias .6='cd ../../../../../../'            # Go back 6 directory levels
 #alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
@@ -161,3 +165,13 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # git aliases
 alias gs='git status'
+alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`' # `cd` to Git repo root
+alias gwts='git ls-files | xargs wc -l' # count number of lines of code in a git project
+alias gws='git diff --shortstat "@{0 day ago}"' # how many lines of code you have written today
+alias gsl='git shortlog -sn' # quickly get a list of contributors and see how many commits each person has
+
+# Maven aliases
+alias mdt='mvn dependency:tree -Dverbose -B > target/deps && cat target/deps'
+alias mda='mvn dependency:analyze -DoutputXML=true'
+alias mdg='mvn depgraph:graph -DshowVersions=true -DshowDuplicates=true -DshowConflicts=true -DshowGroupIds=true && mvn validate'
+alias mep='mvn help:effective-pom -B > target/effective-pom.xml && cat target/effective-pom.xml'
