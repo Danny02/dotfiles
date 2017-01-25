@@ -5,13 +5,8 @@ cd "$(dirname "${BASH_SOURCE}")";
 git pull origin master;
 
 function doIt() {
-	rsync --exclude ".git/" \
-		--exclude ".DS_Store" \
-		--exclude ".osx" \
-		--exclude "bootstrap.sh" \
-		--exclude "README.md" \
-		--exclude "LICENSE-MIT.txt" \
-		-avh --no-perms . ~;
+	#support clients without rsync	
+	cp -rv `\ls -A | egrep -v '.git$|README.md|LICENSE-MIT.txt|bootstrap.sh|.osx|.DS-Store'` ~
 	source ~/.bash_profile;
 }
 
