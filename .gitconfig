@@ -3,6 +3,8 @@
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
 	# View the current working tree status using the short format
 	s = status -s
 
@@ -23,8 +25,6 @@
 
 	# Switch to a branch, creating it if necessary
 	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
@@ -101,6 +101,11 @@
 	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
 	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
 	precomposeunicode = false
+	
+    pager = diff-so-fancy | less --tabs=4 -RFX
+	
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '		
 
 [color]
 
@@ -127,11 +132,6 @@
 	changed = green
 	untracked = cyan
 
-[commit]
-
-	# https://help.github.com/articles/signing-commits-using-gpg/
-	#gpgsign = true
-
 [diff]
 
 	# Detect copies as well as renames
@@ -147,6 +147,9 @@
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
 
+[rebase]
+	autosquash = true
+
 [merge]
 
 	# Include summaries of merged commits in newly created merge commit messages
@@ -157,7 +160,7 @@
 	# Use the Git 1.x.x default to avoid errors on machines with old Git
 	# installations. To use `simple` instead, add this to your `~/.extra` file:
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
-	default = matching
+	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 

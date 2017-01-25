@@ -5,6 +5,17 @@ function mkd() {
 	mkdir -p "$@" && cd "$_";
 }
 
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
+
+# qfind - used to quickly find files that contain a string in a directory
+qfind () {
+  find . -name $1 -exec grep -l -s $2 {} \;
+  return 0
+}
+
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
 	cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
