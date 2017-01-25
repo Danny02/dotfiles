@@ -6,7 +6,7 @@ git pull origin master;
 
 function doIt() {
 	#support clients without rsync	
-	cp -rv `\ls -A | egrep -v '.git$|README.md|LICENSE-MIT.txt|bootstrap.sh|.osx|.DS-Store'` ~
+	cp -r `\ls -A | egrep -v '.git$|README.md|LICENSE-MIT.txt|bootstrap.sh|.osx|.DS-Store'` ~
 	source ~/.bash_profile;
 }
 
