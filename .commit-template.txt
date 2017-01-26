@@ -1,0 +1,13 @@
+Short summary
+
+Warum:
+ + Why is this change necessary?
+
+Wie hilft es beim Lösen des Features/Defekts:
++ How does this change address the issue?
+
+Seiteneffekte:
+ + What side effects does this change have?
+
+ #################################################.####################
+ # 70 character line width
