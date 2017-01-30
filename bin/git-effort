@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-tmp=$(git_extra_mktemp)
+tmp=$(mktemp -t "$(basename "$0")".XXX)
 above=0
 # if the output won't be printed to tty, disable the color
 test -t 1 && to_tty=true
