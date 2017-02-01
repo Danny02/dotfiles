@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# If commit message is a fixup message, ignore it
+[[ -n "$(cat $1 | grep 'fixup!')" ]] && FIXUP="YES"
+[[ -n "$(cat $1 | grep -o '^[^#].*')" ]] && HAS_CONTENT="YES"
+
+REVNAME=$(git symbolic-ref HEAD)
+TICKET=$(echo ${REVNAME##*/} | grep -o -E "[A-Z]+-[0-9]+")
+
+[[ -n "$(cat $1 | grep -o '^[^#].*' | grep ${TICKET})" ]] && INCLUDED="YES"
+
+if [[ -n "${TICKET}" && -z "${FIXUP}" && -z "${INCLUDED}" && -n "${HAS_CONTENT}" ]]; then
+    sed -i.bak -e "1s/^/[${TICKET}] /" $1
+fi
