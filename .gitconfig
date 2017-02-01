@@ -17,6 +17,9 @@
 	# Pull in remote changes for the current repository and all its submodules
 	p = !"git pull; git submodule foreach git pull origin master"
 
+	# Remove any whitespace changes from the working copy
+	clean-whitespace = !"git diff -w --no-color | git apply --cached --ignore-whitespace && git checkout -- . && git reset"
+
 	# Clone a repository including all submodules
 	c = clone --recursive
 
@@ -88,6 +91,7 @@
 	# Use custom `.gitignore` and `.gitattributes`
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
+	hooksPath = ~/.githooks
 
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error
 	# [default] trailing-space: looks for spaces at the end of a line

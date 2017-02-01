@@ -9,5 +9,5 @@ Wie hilft es beim Lösen des Features/Defekts:
 Seiteneffekte:
  + What side effects does this change have?
 
- #################################################.####################
- # 70 character line width
+#################################################.####################
+# 70 character line width
