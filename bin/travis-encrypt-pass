@@ -1,0 +1,8 @@
+#!/bin/sh
+
+[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`
+
+project=${PWD##*/} 
+
+echo "add to project $project the pair $1=<$2>"
+travis encrypt --add -r Danny02/$project "$1='$(pass $2 | head -n1)'"
