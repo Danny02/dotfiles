@@ -1,0 +1,29 @@
+#!/bin/sh
+
+while read cf;
+do
+
+	saveIFS=$IFS
+	IFS='/'
+	parts=($cf)
+	IFS=$saveIFS
+
+	partLen=${#parts[@]}
+
+	projectDir=.
+
+	for (( i=${partLen} - 1; i>0; i--));
+	do
+		dir=$(echo $cf | cut -d '/' -f 1-$i)
+		if [ -f "$dir/pom.xml" ]
+		then
+			projectDir=$dir
+			break
+		fi
+	done
+
+	echo $projectDir
+
+done
+
+# git --no-pager diff --name-only | ./findprojects.sh | paste -sd "," - | xargs mvn install -pl
