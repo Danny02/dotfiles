@@ -169,9 +169,10 @@ alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup 
 alias gwts='git ls-files | xargs wc -l' # count number of lines of code in a git project
 alias gws='git diff --shortstat "@{0 day ago}"' # how many lines of code you have written today
 alias gsl='git shortlog -sn' # quickly get a list of contributors and see how many commits each person has
+alias gpl=$'git branch -r | awk \'{print $1}\' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk \'{print $1}\' | xargs git branch -d'
 
 # Maven aliases
-alias mdt='mvn dependency:tree -Dverbose -B > target/deps && cat target/deps'
+alias mdt='if [ -f pom.xml ]; then [ ! -d target ] && mkdir target; mvn dependency:tree -Dverbose -B > target/deps && less target/deps; else echo "no maven project"; fi'
 alias mda='mvn dependency:analyze -DoutputXML=true'
 alias mdg='mvn depgraph:graph -DshowVersions=true -DshowDuplicates=true -DshowConflicts=true -DshowGroupIds=true && mvn validate'
-alias mep='mvn help:effective-pom -B > target/effective-pom.xml && cat target/effective-pom.xml'
+alias mep='mvn help:effective-pom -B > target/effective-pom.xml && less target/effective-pom.xml'
