@@ -81,6 +81,12 @@
 		fi \
 	}; f"
 
+	# list outdated branches that track a branch which no longer exists
+	lob = !git branch -vv | grep ': gone' | cut -d ' ' -f 3
+ 
+	# delete outdated branches
+	dob = !git lob | xargs git branch -D
+
 [apply]
 
 	# Detect whitespace errors when applying a patch
