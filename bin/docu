@@ -17,6 +17,7 @@ elif [ -n "$2" ]; then
 		mkdir -p $DIR
 	fi
 	echo $(date)$'\n'$2$'\n' >> $DOC_FILE
-else
-	[ -d $DOCU_DIR ] && tree --noreport -- $DOCU_DIR
+elif [ -d $DOCU_DIR ]; then
+	command -v tree >/dev/null 2>&1 && tree --noreport -- $DOCU_DIR
+	command -v tree.com >/dev/null 2>&1 && cmd //c "tree $(cygpath -w $DOCU_DIR) /A /F" | tail -n +4
 fi
