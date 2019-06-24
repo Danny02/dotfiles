@@ -18,7 +18,7 @@
 	p = !"git pull; git submodule foreach git pull origin master"
 
 	# Remove any whitespace changes from the working copy
-	clean-whitespace = !"git diff -w --no-color | git apply --cached --ignore-whitespace && git checkout -- . && git reset"
+	clean-whitespace = !"git --no-pager diff -U0 -w --no-color | git apply --cached --ignore-whitespace --unidiff-zero && git checkout -- . && git reset"
 
 	# Clone a repository including all submodules
 	c = clone --recursive
@@ -113,6 +113,11 @@
 	precomposeunicode = false
 	
     pager = diff-so-fancy | less --tabs=4 -RFX
+	longpaths = true
+	autocrlf = false
+	fscache = true
+	preloadindex = true
+	filemode = false
 	
 [commit]
   template = ~/.commit-template.txt
