@@ -1,5 +1,7 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+. $(brew --prefix asdf)/asdf.sh
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -28,12 +30,17 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for many Bash commands
-if which brew &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-      . $(brew --prefix)/etc/bash_completion;
- elif [ -f /etc/bash_completion ]; then
-      source /etc/bash_completion;
-fi;
-#
+if type brew &>/dev/null; then
+  for COMPLETION in $(brew --prefix)/etc/bash_completion.d/*
+  do
+    [[ -f $COMPLETION ]] && source "$COMPLETION"
+  done
+  if [[ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]];
+  then
+    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+  fi
+fi
+
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
 	complete -o default -o nospace -F _git g;

@@ -176,3 +176,6 @@ alias mdt='if [ -f pom.xml ]; then [ ! -d target ] && mkdir target; mvn dependen
 alias mda='mvn dependency:analyze -DoutputXML=true'
 alias mdg='mvn depgraph:graph -DshowVersions=true -DshowDuplicates=true -DshowConflicts=true -DshowGroupIds=true && mvn validate'
 alias mep='mvn help:effective-pom -B > target/effective-pom.xml && less target/effective-pom.xml'
+
+#app shortcuts
+alias vsc='open -a "Visual Studio Code"'
